@@ -656,7 +656,7 @@ func git_ops_clone(ctx context.Context, repos chan Repo, git_path *string, worki
 				go func() {
 					defer wg.Done()
 					defer g_semaphore.Release(1)
-					cmd := exec.CommandContext(ctx, *git_path, "clone", "-n", "-q", repo.Clone_url)
+					cmd := exec.CommandContext(ctx, *git_path, "clone", "-n", "-q", "--filter=tree:0", repo.Clone_url)
 					cmd.Dir = *working_dir
 					std_err := g_buff_pool.Get().(*bytes.Buffer)
 					std_err.Reset()
